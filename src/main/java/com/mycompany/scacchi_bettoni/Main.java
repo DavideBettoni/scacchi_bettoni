@@ -10,5 +10,7 @@ package com.mycompany.scacchi_bettoni;
  * @author STUDENTE
  */
 public class Main {
-    
+    public static void main(String[] args) {
+        
+    }
 }
