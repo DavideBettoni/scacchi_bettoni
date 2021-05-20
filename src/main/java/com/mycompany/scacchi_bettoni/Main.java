@@ -21,7 +21,7 @@ public class Main {
         LocalDate data;
         
        Scanner tastiera= new Scanner(System.in);
-        String[] vociMenu= new String[6];
+       String[] vociMenu= new String[7];
         
         vociMenu[0] = "Esci";
         vociMenu[1] = "crea nuova tessera";
@@ -54,18 +54,11 @@ public class Main {
                  System.out.println("codice fiscale--> ");
                  tessera.setCodiceFiscale(tastiera.nextLine()); 
                  System.out.println("giorno di vendita--> ");
-                 anno=2010;
-                 mese=3;
-                 giorno=2;
-                 
-                 data=LocalDate.of(anno, mese, giorno);
-                 
-                 tessera.setDataVendita(data); 
-                 do
-                 {
-                 System.out.println("tipologia--> ");
-                 tessera.setTipologia(tastiera.nextLine());  
-                 }while()
+                 tessera.setGiorno(tastiera.nextInt());
+                 System.out.println("mese di vendita--> ");
+                 tessera.setMese(tastiera.nextInt());
+                 System.out.println("anno di vendita--> ");
+                 tessera.setAnno(tastiera.nextInt());
                  
                 }
                  case 2:
@@ -90,6 +83,6 @@ public class Main {
                  }
             }
             
-        }while (sceltaUtente<0 || sceltaUtente>6);
+        }while (sceltaUtente<0 || sceltaUtente>=6);
     }
 }

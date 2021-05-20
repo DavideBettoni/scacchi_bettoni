@@ -16,6 +16,7 @@ public class Tessera
     private String cognome;
     private String nome;
     private String codiceFiscale;
+    private int giorno,mese,anno;
     private LocalDate dataVendita;
     private String tipologia;
     
@@ -69,23 +70,23 @@ public class Tessera
         return tipologia;
     }
 
-    public void setCognome(String cognome) {
+    public void setCognome(String cognome) 
+    {
         this.cognome = cognome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(String nome)
+    {
         this.nome = nome;
     }
 
-    public void setCodiceFiscale(String codiceFiscale) {
+    public void setCodiceFiscale(String codiceFiscale)
+    {
         this.codiceFiscale = codiceFiscale;
     }
 
-    public void setDataVendita(LocalDate dataVendita) {
-        this.dataVendita = dataVendita;
-    }
-
-    public void setTipologia(String tipologia) {
+    public void setTipologia(String tipologia)
+    {
         this.tipologia = tipologia;
     }
     
@@ -93,6 +94,25 @@ public class Tessera
     {
         return "Tessera{" + "cognome=" + cognome + ", nome=" + nome + ", codiceFiscale=" + codiceFiscale + ", dataVendita=" + dataVendita + ", tipologia=" + tipologia + '}';
     }
-   
+      public void setGiorno(int giorno) 
+    {
+        this.giorno = giorno;
+    }
+
+    public void setMese(int mese) 
+    {
+        this.mese = mese;
+    }
+
+    public void setAnno(int anno) 
+    {
+        this.anno = anno;
+    }
+    
+
+    public void setDataVendita(int giorno,int mese,int anno) 
+    {
+        this.dataVendita = dataVendita;
+    } 
     
 }
