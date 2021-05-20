@@ -35,6 +35,14 @@ public class Tessera
         this.dataVendita=t.getDataVendita();
         this.tipologia=t.getTipologia();
     }
+    public Tessera ()
+    {
+        cognome="";
+        nome="";
+        codiceFiscale="";
+        dataVendita=LocalDate.now();
+        tipologia="";
+    }
 
     public String getCognome() 
     {
@@ -79,6 +87,11 @@ public class Tessera
 
     public void setTipologia(String tipologia) {
         this.tipologia = tipologia;
+    }
+    
+    public String toString() 
+    {
+        return "Tessera{" + "cognome=" + cognome + ", nome=" + nome + ", codiceFiscale=" + codiceFiscale + ", dataVendita=" + dataVendita + ", tipologia=" + tipologia + '}';
     }
    
     

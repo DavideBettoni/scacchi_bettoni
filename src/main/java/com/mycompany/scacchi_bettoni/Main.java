@@ -5,6 +5,8 @@
  */
 package com.mycompany.scacchi_bettoni;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Scanner;
 
 /**
@@ -15,6 +17,8 @@ public class Main {
     public static void main(String[] args) 
     {
         int sceltaUtente;
+        int anno,mese,giorno;
+        LocalDate data;
         
        Scanner tastiera= new Scanner(System.in);
         String[] vociMenu= new String[6];
@@ -28,7 +32,7 @@ public class Main {
         vociMenu[6] = "salva le tessere su file";
         
         Menu menu= new Menu(vociMenu);
-        
+        Tessera tessera = null;
         
         do
         {
@@ -37,11 +41,32 @@ public class Main {
             {
                 case 0:
                 {
-                    
+                 System.out.println("L'applicazione terminerà");
+                 break;   
                 }
                 case 1:
                 {
-                   
+                 tessera= new Tessera();
+                 System.out.println("cognome--> ");
+                 tessera.setCognome(tastiera.nextLine());  
+                 System.out.println("Nome--> ");
+                 tessera.setNome(tastiera.nextLine()); 
+                 System.out.println("codice fiscale--> ");
+                 tessera.setCodiceFiscale(tastiera.nextLine()); 
+                 System.out.println("giorno di vendita--> ");
+                 anno=2010;
+                 mese=3;
+                 giorno=2;
+                 
+                 data=LocalDate.of(anno, mese, giorno);
+                 
+                 tessera.setDataVendita(data); 
+                 do
+                 {
+                 System.out.println("tipologia--> ");
+                 tessera.setTipologia(tastiera.nextLine());  
+                 }while()
+                 
                 }
                  case 2:
                 {
@@ -65,5 +90,6 @@ public class Main {
                  }
             }
             
-        }
-
+        }while (sceltaUtente<0 || sceltaUtente>6);
+    }
+}
