@@ -46,6 +46,8 @@ public class Main {
                 }
                 case 1:
                 {
+                tessera=new Tessera();    
+                 
                  tessera= new Tessera();
                  System.out.println("cognome--> ");
                  tessera.setCognome(tastiera.nextLine());  

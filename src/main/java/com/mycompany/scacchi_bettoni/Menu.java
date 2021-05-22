@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class Menu 
 {
-       private String[] elencoVoci;
+    private String[] elencoVoci;
     private int numeroVoci;
     
     public Menu(String[] elencoVoci)
