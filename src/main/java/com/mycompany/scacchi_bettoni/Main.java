@@ -17,8 +17,10 @@ public class Main {
     public static void main(String[] args) 
     {
         int sceltaUtente;
-        int anno,mese,giorno;
+        int posizione=0;
+        int anno,mese,giorno,sceltaAnno;
         LocalDate data;
+        ElencoTessere e1=new ElencoTessere();
         
        Scanner tastiera= new Scanner(System.in);
        String[] vociMenu= new String[7];
@@ -62,6 +64,12 @@ public class Main {
                  System.out.println("anno di vendita--> ");
                  tessera.setAnno(tastiera.nextInt());
                  
+                 e1.setTessera(tessera, posizione);
+                 
+                 System.out.println("Premi un pulsante per continuare");
+                        tastiera.nextLine();
+                        posizione++;
+                 break;
                 }
                  case 2:
                 {
@@ -73,7 +81,12 @@ public class Main {
                 }
                  case 4:
                 {
+                    System.out.println("anno: ");
+                    sceltaAnno=(tastiera.nextInt());
+                    e1.vissualizzaTessereConAnno(sceltaAnno);
                     
+                            
+                            
                 }
                  case 5:
                 {
@@ -85,6 +98,6 @@ public class Main {
                  }
             }
             
-        }while (sceltaUtente<0 || sceltaUtente>=6);
+        }while (sceltaUtente!=0);
     }
 }

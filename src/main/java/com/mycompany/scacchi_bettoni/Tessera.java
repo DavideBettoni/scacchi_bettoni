@@ -92,7 +92,9 @@ public class Tessera
     
     public String toString() 
     {
-        return "Tessera{" + "cognome=" + cognome + ", nome=" + nome + ", codiceFiscale=" + codiceFiscale + ", dataVendita=" + dataVendita + ", tipologia=" + tipologia + '}';
+        String s;
+        s="Tessera{" + cognome + ";" + nome + ";" + codiceFiscale + ";" + dataVendita + ";" + tipologia + '}';
+        return s;
     }
       public void setGiorno(int giorno) 
     {

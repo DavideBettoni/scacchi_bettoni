@@ -65,7 +65,7 @@ public class ElencoTessere
         }
         return c;
     }
-     public int setVolume (Tessera volume, int posizione)
+     public int setTessera (Tessera volume, int posizione)
     {
         if (posizione<0 || posizione>getNMaxTessere())
             return -1;  //pos non valida
@@ -78,7 +78,7 @@ public class ElencoTessere
         
         
     }
-    //restituisce il libro che si trova in una posizione, se la posizioe è vuota o nulla restituici -1
+    //restituisce una tessera che si trova in una posizione, se la posizione è vuota o nulla restituici -1
     public Tessera getVolume (int posizione)
     {
          if (posizione<0 || posizione>getNMaxTessere())
@@ -105,4 +105,19 @@ public class ElencoTessere
         }
         return -1;
     }
+    public int vissualizzaTessereConAnno(int anno)
+    {
+        for(int i=0;i<N_MAX_TESSERE;i++)
+        {
+            if(ElencoTessere[i].getAnno()==anno)
+                {
+                    System.out.println(ElencoTessere[i].toString());
+                    return 0;
+                }
+                else
+                return -1; //nessun abbonato in quell'anno
+        }
+        return 1;
+    }
+            
 }
