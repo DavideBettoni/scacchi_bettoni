@@ -65,7 +65,7 @@ public class ElencoTessere
         }
         return c;
     }
-     public int setTessera (Tessera volume, int posizione)
+     public int setTessera (Tessera tessera, int posizione)
     {
         if (posizione<0 || posizione>getNMaxTessere())
             return -1;  //pos non valida
@@ -73,12 +73,12 @@ public class ElencoTessere
             return -2;  //pos occupata
         
         //se posizione libera
-        ElencoTessere[posizione]=new Tessera(volume);
+        ElencoTessere[posizione]=new Tessera(tessera);
+        n_tessere_presenti++;
         return posizione;
         
         
     }
-    //restituisce una tessera che si trova in una posizione, se la posizione è vuota o nulla restituici -1
     public Tessera getVolume (int posizione)
     {
          if (posizione<0 || posizione>getNMaxTessere())
@@ -95,7 +95,8 @@ public class ElencoTessere
             {
                 if(ElencoTessere[i].getAnno()==anno)
                 {
-                    ElencoTessere[i]=null;
+                    ElencoTessere[i]=ElencoTessere[n_tessere_presenti];
+                    ElencoTessere[n_tessere_presenti]=null;
                     
                     return 0;//eliminazione corretta
                 }
@@ -105,19 +106,25 @@ public class ElencoTessere
         }
         return -1;
     }
-    public int vissualizzaTessereConAnno(int anno)
+    public int vissualizzaTessereConAnno(int sceltaAnno)
     {
+        int c=0;
         for(int i=0;i<N_MAX_TESSERE;i++)
         {
-            if(ElencoTessere[i].getAnno()==anno)
+            if (ElencoTessere[i]==null)
+            {
+                break;  
+            }
+            if(ElencoTessere[i].getDataVendita().getYear()==sceltaAnno)
                 {
                     System.out.println(ElencoTessere[i].toString());
-                    return 0;
+                    c++;
                 }
-                else
-                return -1; //nessun abbonato in quell'anno
         }
-        return 1;
+        if (c==0)
+            return -1;
+        else 
+            return 1;
     }
             
 }

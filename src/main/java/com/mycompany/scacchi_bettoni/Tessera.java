@@ -112,10 +112,12 @@ public class Tessera
     }
     
 
-    public void setDataVendita(int giorno,int mese,int anno) 
+    public void setDataVendita() 
     {
-     LocalDate.of(giorno, mese, anno);
+     dataVendita=LocalDate.of(anno,mese,giorno);
     } 
+    
+    
 
     public int getGiorno() 
     {

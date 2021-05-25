@@ -63,12 +63,16 @@ public class Main {
                  tessera.setMese(tastiera.nextInt());
                  System.out.println("anno di vendita--> ");
                  tessera.setAnno(tastiera.nextInt());
+                 tastiera.nextLine();
+                 System.out.println("tipologia tessera--> ");
+                 tessera.setTipologia(tastiera.nextLine());
+                 tessera.setDataVendita();
                  
                  e1.setTessera(tessera, posizione);
                  
                  System.out.println("Premi un pulsante per continuare");
-                        tastiera.nextLine();
-                        posizione++;
+                 tastiera.nextLine();
+                 posizione++;
                  break;
                 }
                  case 2:
@@ -84,6 +88,7 @@ public class Main {
                     System.out.println("anno: ");
                     sceltaAnno=(tastiera.nextInt());
                     e1.vissualizzaTessereConAnno(sceltaAnno);
+                    
                     
                             
                             
