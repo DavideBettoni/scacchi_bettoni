@@ -36,4 +36,19 @@ public class Ordinatore
         v[posizione1]=v[posizione2];
         v[posizione2]=c;
     }
+     public static String[] selectionSortCrescente(String[] a)
+    {
+        String[] ordinato=new String[a.length];
+        for(int i=0;i<ordinato.length;i++)
+            ordinato[i]=a[i];
+        for(int i=0;i<ordinato.length-1;i++)
+        {
+            for(int j=i+1;j<ordinato.length;j++)
+            {
+                if(ordinato[j].compareToIgnoreCase(ordinato[i])<0)
+                    scambia(ordinato,i,j);
+            }
+        }
+        return ordinato;             
+    }
 }

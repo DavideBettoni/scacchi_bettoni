@@ -36,7 +36,7 @@ public class ElencoTessere
          ElencoTessere=new Tessera[N_MAX_TESSERE];
          for(int i=0;i<getNMaxTessere();i++)
          {
-             ElencoTessere[i]=t.getVolume(i);
+             ElencoTessere[i]=t.getTesserato(i);
          }
     }
     //costruttore array
@@ -89,7 +89,7 @@ public class ElencoTessere
         
         
     }
-    public Tessera getVolume (int posizione)
+    public Tessera getTesserato (int posizione)
     {
          if (posizione<0 || posizione>getNMaxTessere())
             return null;
@@ -146,9 +146,9 @@ public class ElencoTessere
       Tessera a;
       for(int i=0;i<getNMaxTessere();i++)
       {
-              if(getVolume(i)!=null)
+              if(getTesserato(i)!=null)
               {
-                  a=getVolume(i);
+                  a=getTesserato(i);
                   rigaDaScrivere=" Cognome:"+a.getCognome()+"; Nome:"+a.getNome()+";  Codice: "+a.getCodiceFiscale()+";  Tipologia: "+a.getTipologia()+"; Data vendita: "+a.getDataVendita()+";";
                   
                   try 
@@ -192,7 +192,36 @@ public class ElencoTessere
        }
        
     }
-    
+    public String elencoAlfabeticoTessere(int sceltaAnno)
+    {
+        
+        String s="";
+        String elencoAbbonati[]=new String[getNTessera()];
+        int c=0;
+        Tessera tessera;
+        for(int i=0;i<getNMaxTessere();i++)
+        {
+                if(getTesserato(i)!=null)
+                {
+                    if(sceltaAnno==ElencoTessere[i].getDataVendita().getYear())
+                {
+                    tessera=getTesserato(i);
+                    elencoAbbonati[c]=tessera.toString();
+                    c++;
+                }
+                    
+                }
+            
+        }
+        if(c==0)
+            System.out.println("Nessun abbonamento presente");
+        elencoAbbonati=Ordinatore.selectionSortCrescente(elencoAbbonati);
+        for(int i=0;i<elencoAbbonati.length;i++)
+        { 
+            s=s+elencoAbbonati[i]+"\n"; 
+        }     
+    return s; 
+    }
     
     
 }

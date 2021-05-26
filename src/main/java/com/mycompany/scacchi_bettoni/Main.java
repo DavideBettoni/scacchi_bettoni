@@ -108,14 +108,15 @@ public class Main {
                     System.out.println("anno: ");
                     sceltaAnno=(tastiera.nextInt());
                     e1.vissualizzaTessereConAnno(sceltaAnno);
+                    tastiera.nextLine();
                 }
                  case 4:
                 {
                     
-                    
-                    
-                            
-                            
+                    System.out.println("inserire anno: ");
+                    sceltaAnno=(tastiera.nextInt());
+                    e1.elencoAlfabeticoTessere(sceltaAnno);
+                    break;
                 }
                  case 5:
                 {
