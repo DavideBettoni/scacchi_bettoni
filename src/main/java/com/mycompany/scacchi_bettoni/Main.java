@@ -5,6 +5,10 @@
  */
 package com.mycompany.scacchi_bettoni;
 
+
+import Eccezioni.EccezionePosizioneNonValida;
+import file.FileExeption;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Scanner;
@@ -18,8 +22,11 @@ public class Main {
     {
         int sceltaUtente;
         int posizione=0;
-        int anno,mese,giorno,sceltaAnno;
+        int sceltaAnno;
+        String sceltaCodice;
         LocalDate data;
+        String nomeFileBinario="elencotesserati.bin";
+        String nomeFileCSV="Tesserati.txt";
         ElencoTessere e1=new ElencoTessere();
         
        Scanner tastiera= new Scanner(System.in);
@@ -28,13 +35,26 @@ public class Main {
         vociMenu[0] = "Esci";
         vociMenu[1] = "crea nuova tessera";
         vociMenu[2] = "elimina una tessera";
-        vociMenu[3] = "visualizzare gli anni dei tesserati in base a nome e cognome";
-        vociMenu[4] = "visualizzare tesserati in base all'anno";
-        vociMenu[5] = "Visualizza tesserati senior in ordine alfabetico";
-        vociMenu[6] = "salva le tessere su file";
-        
+        vociMenu[3] = "visualizzare tesserati in base all'anno";
+        vociMenu[4] = "Visualizza tesserati senior in ordine alfabetico";
+        vociMenu[5] = "sesporta su file CSV";
+        vociMenu[6] = "salva dati";
         Menu menu= new Menu(vociMenu);
         Tessera tessera = null;
+        
+         try 
+        {
+            e1=e1.caricaElencoTesserati(nomeFileCSV);
+            System.out.println("Dati caricati correttamente");
+        }
+        catch (IOException ex) 
+        {
+            System.out.println("Impossibile accedere al file. I dati non sono stati caricati");
+        }
+        catch (FileExeption ex) 
+        {
+            System.out.println("Errore di lettura dal file. I dati non sono stati caricati");
+        }
         
         do
         {
@@ -49,7 +69,6 @@ public class Main {
                 case 1:
                 {
                 tessera=new Tessera();    
-                 
                  tessera= new Tessera();
                  System.out.println("cognome--> ");
                  tessera.setCognome(tastiera.nextLine());  
@@ -71,23 +90,28 @@ public class Main {
                  e1.setTessera(tessera, posizione);
                  
                  System.out.println("Premi un pulsante per continuare");
-                 tastiera.nextLine();
                  posizione++;
                  break;
                 }
                  case 2:
                 {
-                
+                    tastiera.nextLine();
+                    System.out.println("inserire codice fiscale della tessera da eliminare");
+                    sceltaCodice=tastiera.nextLine();
+                    e1.rimuoviTessera(sceltaCodice);
+                    System.out.println("Premi un pulsante per continuare");
+                    
+                    
                 }
                  case 3:
-                {
-                  
-                }
-                 case 4:
                 {
                     System.out.println("anno: ");
                     sceltaAnno=(tastiera.nextInt());
                     e1.vissualizzaTessereConAnno(sceltaAnno);
+                }
+                 case 4:
+                {
+                    
                     
                     
                             
@@ -95,11 +119,34 @@ public class Main {
                 }
                  case 5:
                 {
-                   
+                 try
+                     {
+                        e1.esportaTesseratiCsv(nomeFileCSV);
+                        System.out.println("esportazione avvenuta correttamente!");
+                     }
+                     catch(IOException ec1)
+                     {
+                         System.out.println("Impossibile accedere al file, i libri non sono stati salvati.");
+                     }
+                     catch(EccezionePosizioneNonValida | FileExeption  ec2)
+                     {
+                         System.out.println(ec2.toString());
+                     }
+                 
+                     break;  
                 }
                  case 6:
                  {
-                     
+                     try 
+                    {
+                        e1.salvaElenco(nomeFileBinario);
+                        System.out.println("Dati salvati correttamente");
+                    } 
+                    catch (IOException ex) 
+                    {
+                        System.out.println("Impossibile accedere al file. I dati non sono stati salvati");  
+                    }
+                    break;
                  }
             }
             

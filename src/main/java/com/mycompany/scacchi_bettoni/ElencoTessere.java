@@ -5,6 +5,16 @@
  */
 package com.mycompany.scacchi_bettoni;
 
+import Eccezioni.EccezionePosizioneNonValida;
+import file.FileExeption;
+import file.TextFile;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 /**
  *
  * @author STUDENTE
@@ -87,21 +97,24 @@ public class ElencoTessere
              return null;
          return new Tessera(ElencoTessere[posizione]);
     }
-    public int rimuoviTessera(int anno, String codiceFiscale)
+    public int rimuoviTessera(String codiceFiscale)
     {
-        for(int i=0;i<getNMaxTessere();i++)
+        for(int i=0;i<=n_tessere_presenti;i++)
         {
+            if (codiceFiscale==null)
+            {
+                break;
+            }
+            if (ElencoTessere[i]==null)
+            {
+                break;
+            }
             if(ElencoTessere[i].getCodiceFiscale().equalsIgnoreCase(codiceFiscale))
             {
-                if(ElencoTessere[i].getAnno()==anno)
-                {
                     ElencoTessere[i]=ElencoTessere[n_tessere_presenti];
                     ElencoTessere[n_tessere_presenti]=null;
                     
                     return 0;//eliminazione corretta
-                }
-                else
-                    return -2;
             }  
         }
         return -1;
@@ -126,5 +139,60 @@ public class ElencoTessere
         else 
             return 1;
     }
-            
+     public void esportaTesseratiCsv(String nomeFile) throws IOException, EccezionePosizioneNonValida, FileExeption
+    {
+      TextFile f1= new TextFile(nomeFile, 'W');
+      String rigaDaScrivere="";
+      Tessera a;
+      for(int i=0;i<getNMaxTessere();i++)
+      {
+              if(getVolume(i)!=null)
+              {
+                  a=getVolume(i);
+                  rigaDaScrivere=" Cognome:"+a.getCognome()+"; Nome:"+a.getNome()+";  Codice: "+a.getCodiceFiscale()+";  Tipologia: "+a.getTipologia()+"; Data vendita: "+a.getDataVendita()+";";
+                  
+                  try 
+                  {
+                      f1.toFile(rigaDaScrivere);
+                  } 
+                  catch (FileExeption ex) 
+                  {
+                      f1.close();
+                      throw new FileExeption("Errore in scrittura!");
+                  }
+              }
+          
+      }
+      f1.close(); 
+    }
+    public void salvaElenco(String nomeFile) throws FileNotFoundException, IOException
+    {
+      FileOutputStream f1=new FileOutputStream(nomeFile);
+      ObjectOutputStream outputStream=new ObjectOutputStream(f1);
+      outputStream.writeObject(this);
+      outputStream.flush();
+      outputStream.close();
+    }
+    
+    public ElencoTessere caricaElencoTesserati(String nomeFile) throws FileNotFoundException, IOException, FileExeption 
+    {
+        FileInputStream f1=new FileInputStream(nomeFile);
+        ObjectInputStream inputStream=new ObjectInputStream(f1);
+        ElencoTessere e;
+        try 
+        {
+           e=(ElencoTessere)inputStream.readObject();
+           inputStream.close();
+            return e;
+        } 
+       catch (ClassNotFoundException ex) 
+       {
+          inputStream.close();
+          throw new FileExeption("Errore nella lettura del file");
+       }
+       
+    }
+    
+    
+    
 }
